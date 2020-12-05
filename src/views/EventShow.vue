@@ -34,23 +34,23 @@
 </template>
 
 <script>
-import EventService from '@/services/EventService.js'
+// import EventService from '@/services/EventService.js'
+import { mapState } from 'vuex'
+import NProgress from 'nprogress'
+import store from '@/store/index.js'
+
 export default {
   props: ['id'],
-  data() {
-    return {
-      event: {}
-    }
+  beforeRouteEnter(routeTo, routeFrom, next) {
+    NProgress.start()
+    store.dispatch('event/fetchEvent', routeTo.params.id).then(() => {
+      NProgress.done()
+      next()
+    })
   },
-  created() {
-    EventService.getEvent(this.id)
-      .then(response => {
-        this.event = response.data
-      })
-      .catch(error => {
-        console.log('There was an error:', error.response)
-      })
-  }
+  computed: mapState({
+    event: state => state.event.event
+  })
 }
 </script>
 <style scoped>
