@@ -24,8 +24,8 @@ export default {
   cursor: pointer;
 }
 .event-card:hover {
-  transform: scale(1.01);
-  box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.2), 0 1px 15px 0 rgba(0, 0, 0, 0.19);
+  transform: scale(1.2);
+  box-shadow: 0 3px 12px 0 rgb(255, 2, 2), 0 1px 15px 0 rgb(255, 230, 2);
 }
 .event-card > .title {
   margin: 0;

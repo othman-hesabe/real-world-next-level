@@ -44,6 +44,24 @@
       "date": "2019-02-02T23:27:00.000Z",
       "time": "1:00",
       "attendees": []
+    },
+    {
+      "id": 6527322,
+      "user": {
+        "id": "abc123",
+        "name": "Adam"
+      },
+      "category": "sustainability",
+      "organizer": {
+        "id": "abc123",
+        "name": "Adam"
+      },
+      "title": "test 1",
+      "description": "test 1 ",
+      "location": "abcd",
+      "date": "2020-12-01T08:31:00.000Z",
+      "time": "1:00",
+      "attendees": []
     }
   ]
 }
