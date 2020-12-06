@@ -1,7 +1,8 @@
 .DS_Store
 node_modules
 /dist
-
+ssh_key_git
+ssh_key_git.pub
 # local env files
 .env.local
 .env.*.local
