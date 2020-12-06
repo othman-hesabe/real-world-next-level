@@ -1,14 +1,15 @@
 <template>
   <div>
     <div class="event-header">
-      <span class="eyebrow">@{{ event.time }} on {{ event.date }}</span>
+      <span class="eyebrow">@{{ event.time }} on {{ event.date | date }}</span>
       <h1 class="title">{{ event.title }}</h1>
-      <!-- Add this conditional dot notation  -->
       <h5>Organized by {{ event.organizer }}</h5>
       <h5>Category: {{ event.category }}</h5>
     </div>
 
-    <BaseIcon name="map"><h2>Location</h2></BaseIcon>
+    <BaseIcon name="map">
+      <h2>Location</h2>
+    </BaseIcon>
 
     <address>{{ event.location }}</address>
 
@@ -17,23 +18,17 @@
 
     <h2>
       Attendees
-      <span class="badge -fill-gradient">{{
-        event.attendees ? event.attendees.length : 0
-      }}</span>
+      <span class="badge -fill-gradient">{{ event.attendees ? event.attendees.length : 0 }}</span>
     </h2>
     <ul class="list-group">
-      <li
-        v-for="(attendee, index) in event.attendees"
-        :key="index"
-        class="list-item"
-      >
+      <li v-for="(attendee, index) in event.attendees" :key="index" class="list-item">
         <b>{{ attendee.name }}</b>
       </li>
     </ul>
   </div>
 </template>
-
 <script>
+<<<<<<< HEAD
 // import EventService from '@/services/EventService.js'
 import { mapState } from 'vuex'
 import NProgress from 'nprogress'
@@ -51,6 +46,15 @@ export default {
   computed: mapState({
     event: state => state.event.event
   })
+=======
+export default {
+  props: {
+    event: {
+      type: Object,
+      required: true
+    }
+  }
+>>>>>>> ab57dfe5c0d89529210181331353320597644a7d
 }
 </script>
 <style scoped>

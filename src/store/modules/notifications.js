@@ -26,8 +26,4 @@ export const actions = {
   remove({ commit }, notificationToRemove) {
     commit('DELETE', notificationToRemove)
   }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> ab57dfe5c0d89529210181331353320597644a7d

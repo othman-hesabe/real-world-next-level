@@ -3,6 +3,8 @@ import VueRouter from "vue-router";
 // import EventCreate from "../views/EventCreate.vue";
 // import EventList from '../views/EventList.vue';
 // import EventShow from '../views/EventShow.vue';
+import NProgress from 'nprogress';
+import store from '@/store/index.js';
 
 Vue.use(VueRouter);
 
@@ -23,9 +25,20 @@ const routes = [
     path: "/event/:id",
     name: "event-show",
     props: true,
-    component: () =>
-     import("../views/EventShow.vue")
-  }
+    beforeEnter(routeTo, routeFrom, next) {
+      store.dispatch('event/fetchEvent', routeTo.params.id).then(event => {
+        routeTo.params.event = event
+        next()
+      })
+       .catch(error => {
+            if (error.response && error.response.status == 404) {
+              next({ name: '404', params: { resource: 'event' } })
+            } else {
+              next({ name: 'network-issue' })
+            }
+          })
+    }
+  },
  
   
   // {
@@ -44,5 +57,14 @@ const router = new VueRouter({
   mode: "history",
   routes
 });
+router.beforeEach((routeTo, routeFrom, next) => {
+  NProgress.start()
+  next()
+})
+
+router.afterEach(() =>{
+  NProgress.done()
+})
 
 export default router;
+

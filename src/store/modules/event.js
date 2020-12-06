@@ -5,7 +5,12 @@ export const namespaced = true
 export const state = {
   events: [],
   eventsTotal: 0,
+<<<<<<< HEAD
   event: {}
+=======
+  event: {},
+  perPage: 3
+>>>>>>> ab57dfe5c0d89529210181331353320597644a7d
 }
 
 export const mutations = {
@@ -28,6 +33,10 @@ export const actions = {
     return EventService.postEvent(event)
       .then(() => {
         commit('ADD_EVENT', event)
+<<<<<<< HEAD
+=======
+        commit('SET_EVENT', event)
+>>>>>>> ab57dfe5c0d89529210181331353320597644a7d
         const notification = {
           type: 'success',
           message: 'Your event has been created!'
@@ -43,8 +52,13 @@ export const actions = {
         throw error
       })
   },
+<<<<<<< HEAD
   fetchEvents({ commit, dispatch }, { perPage, page }) {
     EventService.getEvents(perPage, page)
+=======
+  fetchEvents({ commit, dispatch, state }, { page }) {
+    return EventService.getEvents(state.perPage, page)
+>>>>>>> ab57dfe5c0d89529210181331353320597644a7d
       .then(response => {
         commit('SET_EVENTS_TOTAL', parseInt(response.headers['x-total-count']))
         commit('SET_EVENTS', response.data)
@@ -57,11 +71,20 @@ export const actions = {
         dispatch('notification/add', notification, { root: true })
       })
   },
+<<<<<<< HEAD
   fetchEvent({ commit, getters, dispatch }, id) {
+=======
+  fetchEvent({ commit, getters, state }, id) {
+    if (id == state.event.id) {
+      return state.event
+    }
+
+>>>>>>> ab57dfe5c0d89529210181331353320597644a7d
     var event = getters.getEventById(id)
 
     if (event) {
       commit('SET_EVENT', event)
+<<<<<<< HEAD
     } else {
       return EventService.getEvent(id)
         .then(response => {
@@ -74,6 +97,14 @@ export const actions = {
           }
           dispatch('notification/add', notification, { root: true })
         })
+=======
+      return event
+    } else {
+      return EventService.getEvent(id).then(response => {
+        commit('SET_EVENT', response.data)
+        return response.data
+      })
+>>>>>>> ab57dfe5c0d89529210181331353320597644a7d
     }
   }
 }
@@ -81,4 +112,8 @@ export const getters = {
   getEventById: state => id => {
     return state.events.find(event => event.id === id)
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> ab57dfe5c0d89529210181331353320597644a7d
